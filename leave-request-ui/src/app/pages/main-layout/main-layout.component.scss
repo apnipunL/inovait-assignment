@@ -1,0 +1,56 @@
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: lightgray;
+}
+
+.header {
+  text-align: center;
+  padding-top: 15px;
+
+  h1 {
+    font-weight: bold;
+  }
+}
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  background-color: blue;
+}
+
+.side-nav {
+  background-color: #f1e9e9;
+  flex: 1;
+  min-width: 200px;
+  padding: 20px;
+}
+
+.main-content {
+  background-color: #ffffff;
+  flex: 4;
+}
+
+.example-button-container {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+}
+
+.side-nav a {
+  margin-top: 20px;
+}
+
+.side-nav button {
+  margin-top: 50px;
+}
+
+.side-nav a:first-child {
+  margin-top: 0;
+}
+
+.active-router-link {
+  filter: brightness(80%);
+}

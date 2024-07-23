@@ -1,0 +1,24 @@
+<div class="page-wrapper">
+  <div class="header">
+    <h1>Leave Request Form</h1>
+  </div>
+  <div class="main-container">
+    <div class="side-nav">
+      <a mat-fab extended routerLinkActive="active-router-link" routerLink="/main/home" style="width: 100%;">
+        <mat-icon>home</mat-icon>
+        Home
+      </a>
+      <a mat-fab extended routerLinkActive="active-router-link" routerLink="/main/leave-request-list" style="width: 100%;">
+        <mat-icon>list_alt</mat-icon>
+        Leave Request List
+      </a>
+      <button mat-fab extended style="width: 100%;">
+        <mat-icon>logout</mat-icon>
+        Logout
+      </button>
+    </div>
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
