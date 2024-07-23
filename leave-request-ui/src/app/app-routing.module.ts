@@ -4,8 +4,8 @@ import {SignUpComponent} from "./pages/sign-up/sign-up.component";
 import {LoginComponent} from "./pages/login/login.component";
 import {MainLayoutComponent} from "./pages/main-layout/main-layout.component";
 import {HomeComponent} from "./pages/main/home/home.component";
-import {LeaveRequestFormComponent} from "./pages/main/leave-request-form/leave-request-form.component";
 import {LeaveRequestListComponent} from "./pages/main/leave-request-list/leave-request-list.component";
+import {authGuard} from "./guards/auth.guard";
 
 const routes: Routes = [
   {
@@ -25,10 +25,12 @@ const routes: Routes = [
       {
         path: 'home',
         component: HomeComponent,
+        canActivate: [authGuard],
       },
       {
         path: 'leave-request-list',
         component: LeaveRequestListComponent,
+        canActivate: [authGuard],
       },
     ]
   },
