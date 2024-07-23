@@ -12,7 +12,14 @@
         <mat-icon>list_alt</mat-icon>
         Leave Request List
       </a>
-      <button mat-fab extended style="width: 100%;">
+      <button mat-fab extended
+              [swal]="{
+                  title: 'Logout?',
+                  text: 'Are you sure do you really want to logout?',
+                  showCancelButton: true
+              }"
+              (confirm)="onLogout()"
+              style="width: 100%;">
         <mat-icon>logout</mat-icon>
         Logout
       </button>

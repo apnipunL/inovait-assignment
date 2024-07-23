@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class MainLayoutComponent {
 
+  onLogout(): void {
+    console.log('logout')
+  }
+
 }

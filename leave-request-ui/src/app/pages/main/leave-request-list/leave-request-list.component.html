@@ -38,7 +38,13 @@
         <button mat-mini-fab style="margin-right: 15px;" (click)="onEditLeaveRequest(element)">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-mini-fab>
+        <button mat-mini-fab
+                [swal]="{
+                  title: 'Delete?',
+                  text: 'Are you sure do you really want to delete this leave request entry?',
+                  showCancelButton: true
+                }"
+                (confirm)="onDeleteLeaveRequest(element)">
           <mat-icon>delete</mat-icon>
         </button>
       </td>

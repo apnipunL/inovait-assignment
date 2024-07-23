@@ -37,7 +37,7 @@ export class LeaveRequestListComponent {
   }
 
   onDeleteLeaveRequest(dataRow: any): void {
-
+    console.log('delete', dataRow.id)
   }
 
 }
