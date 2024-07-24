@@ -1,9 +1,18 @@
 import { Component } from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  FormGroupDirective, NgForm,
+  ValidationErrors,
+  ValidatorFn,
+  Validators
+} from "@angular/forms";
 import {ApiService} from "../../services/api.service";
 import {Router} from "@angular/router";
 import {Constants} from "../../constants/Constants";
 import {AlertUtil} from "../../utils/alert.util";
+import {ErrorStateMatcher} from "@angular/material/core";
 
 @Component({
   selector: 'app-sign-up',
@@ -12,11 +21,19 @@ import {AlertUtil} from "../../utils/alert.util";
 })
 export class SignUpComponent {
 
+  confirmPasswordValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    return control.value.password === control.value.confirmPassword
+      ? null
+      : { PasswordNoMatch: true };
+  };
+
+  confirmPasswordErrorStateMatcher = new ConfirmPasswordErrorStateMatcher();
+
   signUpForm = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
-    confirmPassword: new FormControl(''),
-  });
+    username: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
+    confirmPassword: new FormControl('', [Validators.required]),
+  }, { validators: this.confirmPasswordValidator });
 
   constructor(
     private apiService: ApiService,
@@ -39,23 +56,16 @@ export class SignUpComponent {
   }
 
   validateForm(): boolean {
-    if (!this.signUpForm.value.username?.trim()) {
-      AlertUtil.showErrorAlert('Please enter the username');
-      return false;
-    }
-
-    if (!this.signUpForm.value.password?.trim()) {
-      AlertUtil.showErrorAlert('Please enter the password');
-      return false;
-    }
-
-    if (this.signUpForm.value.password !== this.signUpForm.value.confirmPassword) {
-      AlertUtil.showErrorAlert('Password and Confirm Password mismatch.');
-      return false;
-    }
-
-    return true;
+    this.signUpForm.markAllAsTouched();
+    return this.signUpForm.valid;
   }
 
+}
+
+class ConfirmPasswordErrorStateMatcher implements ErrorStateMatcher{
+  isErrorState(control: AbstractControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    if (!form?.form?.controls?.['confirmPassword']?.touched) return false;
+    return form?.form?.controls?.['confirmPassword']?.hasError('required') || form?.form?.errors?.['PasswordNoMatch'];
+  }
 
 }
