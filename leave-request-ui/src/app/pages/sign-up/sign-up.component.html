@@ -1,20 +1,20 @@
 <div class="page-wrapper">
   <div class="main-content">
     <h1>SIGN UP</h1>
-    <form class="auth-form">
+    <form class="auth-form" [formGroup]="signUpForm">
       <mat-form-field appearance="outline">
         <mat-label>Username</mat-label>
-        <input matInput>
+        <input matInput formControlName="username">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
-        <input matInput type="password">
+        <input matInput type="password" formControlName="password">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Confirm Password</mat-label>
-        <input matInput type="password">
+        <input matInput type="password" formControlName="confirmPassword">
       </mat-form-field>
-      <button mat-fab extended type="button">
+      <button mat-fab extended type="button" (click)="onSignUpFormSubmit()">
         <mat-icon>create</mat-icon>
         Sign Up
       </button>

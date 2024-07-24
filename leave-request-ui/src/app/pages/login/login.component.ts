@@ -1,5 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from "../../services/api.service";
+import {FormControl, FormGroup} from "@angular/forms";
+import {AlertUtil} from "../../utils/alert.util";
+import {Router} from "@angular/router";
+import {Constants} from "../../constants/Constants";
 
 @Component({
   selector: 'app-login',
@@ -8,8 +12,15 @@ import {ApiService} from "../../services/api.service";
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private apiService: ApiService) {
-  }
+  loginForm = new FormGroup({
+    username: new FormControl(''),
+    password: new FormControl(''),
+  });
+
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
 
@@ -18,20 +29,29 @@ export class LoginComponent implements OnInit {
   onLoginFormSubmit(): void {
     if (!this.validateForm()) return;
 
-    this.apiService.login({
-      username: '',
-      password: ''
-    }).subscribe({
+    this.apiService.login(this.loginForm.value).subscribe({
       next: res => {
         console.log(res);
+        localStorage.setItem(Constants.LOCAL_STORAGE_KEY_ACCESS_TOKEN, res.data.accessToken);
+        this.router.navigate(['/main']);
       },
       error: err => {
-        console.log(err);
+        AlertUtil.showCommonErrorAlert(err);
       }
     });
   }
 
   validateForm(): boolean {
+    if (!this.loginForm.value.username?.trim()) {
+      AlertUtil.showErrorAlert('Please enter the username');
+      return false;
+    }
+
+    if (!this.loginForm.value.password?.trim()) {
+      AlertUtil.showErrorAlert('Please enter the password');
+      return false;
+    }
+
     return true;
   }
 

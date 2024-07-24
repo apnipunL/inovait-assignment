@@ -21,6 +21,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptors} from "@angular/common/http";
 import {ApiInterceptor} from "./interceptors/api.interceptor";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import {ApiInterceptor} from "./interceptors/api.interceptor";
     MatDatepickerModule,
     MatNativeDateModule,
     HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [
     {
