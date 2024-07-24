@@ -2,13 +2,17 @@ package com.inovaitsys.leaverequestapi.entity;
 
 import com.inovaitsys.leaverequestapi.enums.LeaveType;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "leave_request")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class LeaveRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

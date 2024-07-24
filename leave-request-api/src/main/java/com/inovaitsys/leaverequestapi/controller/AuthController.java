@@ -3,6 +3,7 @@ package com.inovaitsys.leaverequestapi.controller;
 import com.inovaitsys.leaverequestapi.dto.LoginResponseDto;
 import com.inovaitsys.leaverequestapi.dto.UserDto;
 import com.inovaitsys.leaverequestapi.entity.User;
+import com.inovaitsys.leaverequestapi.service.JwtService;
 import com.inovaitsys.leaverequestapi.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final UserService userService;
+    private final JwtService jwtService;
 
     @PostMapping("/register")
     public ResponseEntity<UserDto> register(@RequestBody UserDto userDto) {
@@ -31,9 +33,7 @@ public class AuthController {
 
     @GetMapping("/me")
     public ResponseEntity<UserDto> getCurrentUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User currentUser = (User) authentication.getPrincipal();
-
+        User currentUser = jwtService.getCurrentUser();
         return ResponseEntity.ok(new UserDto(currentUser.getId(), currentUser.getUsername(), "*****"));
     }
 

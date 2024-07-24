@@ -1,5 +1,6 @@
 package com.inovaitsys.leaverequestapi.service;
 
+import com.inovaitsys.leaverequestapi.entity.User;
 import io.jsonwebtoken.Claims;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -19,5 +20,7 @@ public interface JwtService {
     long getExpirationTime();
 
     boolean isTokenValid(String token, UserDetails userDetails);
+
+    User getCurrentUser();
 
 }
