@@ -1,6 +1,10 @@
-import Swal from "sweetalert2";
+import Swal, {SweetAlertResult} from "sweetalert2";
 
 export class AlertUtil {
+
+  public static showSuccessAlert(message: string): Promise<SweetAlertResult> {
+    return Swal.fire({title: 'Success!', text: message, icon: 'success'});
+  }
 
   public static showErrorAlert(message: string): void {
     Swal.fire({title: 'Error!', text: message, icon: 'error'});

@@ -44,10 +44,9 @@ export class SignUpComponent {
     if (!this.validateForm()) return;
 
     this.apiService.signUp(this.signUpForm.value).subscribe({
-      next: res => {
-        console.log(res);
-        localStorage.setItem(Constants.LOCAL_STORAGE_KEY_ACCESS_TOKEN, res.data.accessToken);
-        this.router.navigate(['/main']);
+      next: async res => {
+        await AlertUtil.showSuccessAlert('User account created successfully! You can login now.');
+        this.router.navigate(['/login']);
       },
       error: err => {
         AlertUtil.showCommonErrorAlert(err);
