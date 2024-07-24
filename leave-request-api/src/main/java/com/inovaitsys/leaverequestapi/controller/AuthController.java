@@ -2,13 +2,13 @@ package com.inovaitsys.leaverequestapi.controller;
 
 import com.inovaitsys.leaverequestapi.dto.LoginResponseDto;
 import com.inovaitsys.leaverequestapi.dto.UserDto;
+import com.inovaitsys.leaverequestapi.entity.User;
 import com.inovaitsys.leaverequestapi.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,6 +27,14 @@ public class AuthController {
     public ResponseEntity<LoginResponseDto> login(@RequestBody UserDto userDto) {
         LoginResponseDto loginResponseDto = userService.authenticate(userDto);
         return ResponseEntity.ok(loginResponseDto);
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<UserDto> getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = (User) authentication.getPrincipal();
+
+        return ResponseEntity.ok(new UserDto(currentUser.getId(), currentUser.getUsername(), "*****"));
     }
 
 }

@@ -18,6 +18,10 @@ export class ApiService {
     return this.httpClient.post(Constants.API_BASE_URL + '/auth/register', data);
   }
 
+  getCurrentUser(): Observable<any> {
+    return this.httpClient.get(Constants.API_BASE_URL + '/auth/me');
+  }
+
   createLeaveRequest(data: any): Observable<any> {
     return this.httpClient.post(Constants.API_BASE_URL + '/leave-requests', data);
   }
