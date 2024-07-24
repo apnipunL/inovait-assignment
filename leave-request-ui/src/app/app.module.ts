@@ -19,6 +19,8 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
+import {HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptors} from "@angular/common/http";
+import {ApiInterceptor} from "./interceptors/api.interceptor";
 
 @NgModule({
   declarations: [
@@ -43,8 +45,15 @@ import {MatNativeDateModule} from "@angular/material/core";
     SweetAlert2Module.forRoot(),
     MatDatepickerModule,
     MatNativeDateModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ApiInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
