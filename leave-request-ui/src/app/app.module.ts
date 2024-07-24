@@ -17,6 +17,8 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatTableModule} from "@angular/material/table";
 import {MatDialogModule} from "@angular/material/dialog";
 import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
     MatTableModule,
     MatDialogModule,
     SweetAlert2Module.forRoot(),
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,1 +1,33 @@
-<p>leave-request-form works!</p>
+<div class="main-content">
+  <h2 *ngIf="mode === 'ADD'">New Leave Request</h2>
+  <h2 *ngIf="mode === 'EDIT'">Update Leave Request: #{{leaveRequestId}}</h2>
+
+  <form class="main-form">
+    <mat-form-field>
+      <mat-label>Leave Type</mat-label>
+      <select matNativeControl>
+        <option value="CASUAL">Casual Leave</option>
+        <option value="MEDICAL">Medical Leave</option>
+        <option value="ANNUAL">Annual Leave</option>
+      </select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Start Date and End Date</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input matStartDate placeholder="Start date" readonly>
+        <input matEndDate placeholder="End date" readonly>
+      </mat-date-range-input>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Reason for Leave</mat-label>
+      <textarea matInput placeholder="Ex. I'm taking a medical leave due to fever"></textarea>
+    </mat-form-field>
+    <button mat-fab extended type="button">
+      <mat-icon>save</mat-icon>
+      {{mode === 'ADD' ? 'Save' : 'Update'}}
+    </button>
+  </form>
+</div>
+
