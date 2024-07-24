@@ -20,24 +20,36 @@ export class LeaveRequestListComponent {
   }
 
   onNewLeaveRequest(): void {
-    this.matDialog.open(LeaveRequestFormComponent, {
+    const dialogRef = this.matDialog.open(LeaveRequestFormComponent, {
       data: {
         mode: 'ADD'
       }
     });
+
+    dialogRef.afterClosed().subscribe(_ => {
+      this.loadLeaveRequests();
+    });
   }
 
   onEditLeaveRequest(dataRow: any): void {
-    this.matDialog.open(LeaveRequestFormComponent, {
+    const dialogRef = this.matDialog.open(LeaveRequestFormComponent, {
       data: {
         mode: 'EDIT',
         leaveRequestId: dataRow.id
       }
     });
+
+    dialogRef.afterClosed().subscribe(_ => {
+      this.loadLeaveRequests();
+    });
   }
 
   onDeleteLeaveRequest(dataRow: any): void {
     console.log('delete', dataRow.id)
+  }
+
+  loadLeaveRequests(): void {
+    console.log('load leave reqs')
   }
 
 }
