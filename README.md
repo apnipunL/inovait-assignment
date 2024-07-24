@@ -23,3 +23,6 @@ Node JS | 18.16.0
     2. Run **npm install** command in terminal
     3. Run **ng serve** command in terminal
     4. Open **http://localhost:4200** and check the preview
+
+# Note
+Lombok is used in the application to reduce boilerplate code in the application. Make sure you have installed/enabled lombok in your IDE.
