@@ -31,8 +31,7 @@ export class LoginComponent implements OnInit {
 
     this.apiService.login(this.loginForm.value).subscribe({
       next: res => {
-        console.log(res);
-        localStorage.setItem(Constants.LOCAL_STORAGE_KEY_ACCESS_TOKEN, res.data.accessToken);
+        localStorage.setItem(Constants.LOCAL_STORAGE_KEY_ACCESS_TOKEN, res.accessToken);
         this.router.navigate(['/main']);
       },
       error: err => {

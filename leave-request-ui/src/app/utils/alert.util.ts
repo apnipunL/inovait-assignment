@@ -8,9 +8,7 @@ export class AlertUtil {
 
   public static showCommonErrorAlert(err: any): void {
     if (err && err.status) {
-      switch (err.status) {
-        default: this.showErrorAlert('Something went wrong. Please retry!'); break;
-      }
+      this.showErrorAlert(err.error?.message ?? 'Something went wrong. Please retry!');
     } else {
       this.showErrorAlert('Something went wrong. Please retry!');
     }
