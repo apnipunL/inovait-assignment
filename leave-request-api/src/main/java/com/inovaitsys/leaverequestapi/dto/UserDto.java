@@ -11,4 +11,12 @@ public class UserDto {
     private Long id;
     private String username;
     private String password;
+
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                '}';
+    }
 }
