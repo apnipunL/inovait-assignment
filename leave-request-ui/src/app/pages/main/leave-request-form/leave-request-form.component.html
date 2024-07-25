@@ -2,29 +2,36 @@
   <h2 *ngIf="mode === 'ADD'">New Leave Request</h2>
   <h2 *ngIf="mode === 'EDIT'">Update Leave Request: #{{leaveRequestId}}</h2>
 
-  <form class="main-form">
+  <form class="main-form validation-form" [formGroup]="leaveRequestForm">
     <mat-form-field>
       <mat-label>Leave Type</mat-label>
-      <select matNativeControl>
+      <select matNativeControl formControlName="leaveType">
         <option value="CASUAL">Casual Leave</option>
         <option value="MEDICAL">Medical Leave</option>
         <option value="ANNUAL">Annual Leave</option>
       </select>
+      <mat-error *ngIf="leaveRequestForm.controls.leaveType.hasError('required')">
+        Leave Type is required
+      </mat-error>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Start Date and End Date</mat-label>
       <mat-date-range-input [rangePicker]="picker">
-        <input matStartDate placeholder="Start date" readonly>
-        <input matEndDate placeholder="End date" readonly>
+        <input matStartDate placeholder="Start date" readonly formControlName="startDate">
+        <input matEndDate placeholder="End date" readonly formControlName="endDate">
       </mat-date-range-input>
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-date-range-picker #picker></mat-date-range-picker>
+      <mat-error *ngIf="leaveRequestForm.controls.startDate.hasError('required') ||
+      leaveRequestForm.controls.endDate.hasError('required')">
+        Leave Start Date and End Date are required
+      </mat-error>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Reason for Leave</mat-label>
-      <textarea matInput placeholder="Ex. I'm taking a medical leave due to fever"></textarea>
+      <textarea matInput placeholder="Ex. I'm taking a medical leave due to fever" formControlName="reason"></textarea>
     </mat-form-field>
-    <button mat-fab extended type="button">
+    <button mat-fab extended type="button" (click)="onLeaveRequestFormSubmit()">
       <mat-icon>save</mat-icon>
       {{mode === 'ADD' ? 'Save' : 'Update'}}
     </button>

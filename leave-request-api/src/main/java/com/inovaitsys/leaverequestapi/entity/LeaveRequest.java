@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "leave_request")
@@ -23,10 +24,10 @@ public class LeaveRequest {
     private LeaveType leaveType;
 
     @Column(nullable = false)
-    private LocalDate startDate;
+    private Date startDate;
 
     @Column(nullable = false)
-    private LocalDate endDate;
+    private Date endDate;
 
     @Column(length = 500)
     private String reason;

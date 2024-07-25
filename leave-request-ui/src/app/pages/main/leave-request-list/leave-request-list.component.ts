@@ -1,22 +1,27 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {LeaveRequestFormComponent} from "../leave-request-form/leave-request-form.component";
+import {Constants} from "../../../constants/Constants";
+import {AlertUtil} from "../../../utils/alert.util";
+import {ApiService} from "../../../services/api.service";
 
 @Component({
   selector: 'app-leave-request-list',
   templateUrl: './leave-request-list.component.html',
   styleUrls: ['./leave-request-list.component.scss']
 })
-export class LeaveRequestListComponent {
+export class LeaveRequestListComponent implements OnInit{
 
   displayedColumns: string[] = ['id', 'leaveType', 'startDate', 'endDate', 'reason', 'action'];
-  dataSource = [
-    {id: 1, leaveType: 'CASUAL', startDate: new Date(), endDate: new Date(), reason: 'leave comment here'},
-    {id: 2, leaveType: 'CASUAL', startDate: new Date(), endDate: new Date(), reason: 'leave comment here'},
-  ];
+  dataSource = [];
 
-  constructor(private matDialog: MatDialog) {
+  constructor(
+    private matDialog: MatDialog,
+    private apiService: ApiService,
+  ) { }
 
+  ngOnInit(): void {
+    this.loadLeaveRequests();
   }
 
   onNewLeaveRequest(): void {
@@ -45,11 +50,26 @@ export class LeaveRequestListComponent {
   }
 
   onDeleteLeaveRequest(dataRow: any): void {
-    console.log('delete', dataRow.id)
+    this.apiService.deleteLeaveRequest(dataRow.id).subscribe({
+      next: res => {
+        AlertUtil.showSuccessAlert('Leave request deleted successfully');
+        this.loadLeaveRequests();
+      },
+      error: err => {
+        AlertUtil.showCommonErrorAlert(err);
+      }
+    });
   }
 
   loadLeaveRequests(): void {
-    console.log('load leave reqs')
+    this.apiService.getAllLeaveRequest().subscribe({
+      next: res => {
+        this.dataSource = res;
+      },
+      error: err => {
+        AlertUtil.showCommonErrorAlert(err);
+      }
+    });
   }
 
 }

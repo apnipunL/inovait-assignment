@@ -38,4 +38,8 @@ export class ApiService {
     return this.httpClient.get(Constants.API_BASE_URL + '/leave-requests');
   }
 
+  getLeaveRequestById(id: number): Observable<any> {
+    return this.httpClient.get(Constants.API_BASE_URL + '/leave-requests/' + id);
+  }
+
 }
