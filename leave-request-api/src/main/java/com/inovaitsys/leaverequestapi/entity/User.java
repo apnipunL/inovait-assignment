@@ -13,6 +13,8 @@ import java.util.List;
 @Entity
 @Table(name = "system_user")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
