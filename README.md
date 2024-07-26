@@ -1,6 +1,10 @@
 # Inova IT (Bevolv) Assignment
 Both Backend and Frontend projects are in this repository. Please read the instructions below before running the project
 
+**Please note that the Unit Tests and Logs are not written to fully cover the application. Just implemented them in some places for demonstration purpose.**
+  - Logs - in Controller Layer
+  - Unit Testing - in Service Layer > LeaveRequestService
+
 # Prerequisites to run the project (versions used in my local environment)
 Tool / Framework | Version
 --- | ---
